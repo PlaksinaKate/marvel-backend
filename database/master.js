@@ -12,10 +12,10 @@ async function getMaster(id) {
   return rows[0];
 }
 
-async function createMaster(name, position, description) {
+async function createMaster(name, position, description, password) {
   const [result] = await pool.query(
-    `INSERT INTO master (name, position, description) VALUES (?, ?, ?)`,
-    [name, position, description]
+    `INSERT INTO master (name, position, description, password) VALUES (?, ?, ?, ?)`,
+    [name, position, description, password]
   );
 
   return result.insertId;

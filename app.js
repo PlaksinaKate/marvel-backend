@@ -33,11 +33,12 @@ app.get("/master/:id", async (req, res) => {
 });
 
 app.post("/master", async (req, res) => {
-  const { name, position, description } = req.body;
+  const { name, position, description, password } = req.body;
   const newMasterId = await database.masters.createMaster(
     name,
     position,
-    description
+    description,
+    password
   );
   res.status(201).send(newMasterId);
 });

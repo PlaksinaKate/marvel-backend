@@ -12,10 +12,10 @@ async function getClient(id) {
   return rows[0];
 }
 
-async function createClient(name, phone) {
+async function createClient(name, phone, password) {
   const [result] = await pool.query(
-    `INSERT INTO client (name, phone) VALUES (?, ?)`,
-    [name, phone]
+    `INSERT INTO client (name, phone, password) VALUES (?, ?, ?)`,
+    [name, phone, password]
   );
 
   return result.insertId;
