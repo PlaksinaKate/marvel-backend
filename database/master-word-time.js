@@ -23,7 +23,7 @@ async function getWorkTimeByDate(date) {
 
 async function getWorkTimeByDateTime(date, time) {
   const [rows] = await pool.query(
-    `SELECT * FROM master_work_time WHERE date = ? AND time = ?`,
+    `SELECT * FROM master_work_time WHERE date = ? AND time_interval = ?`,
     [date, time]
   );
   return rows[0];

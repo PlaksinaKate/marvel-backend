@@ -43,7 +43,15 @@ app.post("/master", async (req, res) => {
 });
 
 app.get("/master-work-time", async (req, res) => {
-  const workTime = await database.masterWorkTime.getAllMasterWorkTime();
+  const { date, time } = req.query;
+  let workTime;
+  if (date && time) {
+    workTime = await database.masterWorkTime.getWorkTimeByDateTime(date, time);
+  } else if (date) {
+    workTime = await database.masterWorkTime.getWorkTimeByDate(date);
+  } else {
+    workTime = await database.masterWorkTime.getAllMasterWorkTime();
+  }
   res.send(workTime);
 });
 
@@ -51,21 +59,6 @@ app.get("/master-work-time/:id", async (req, res) => {
   const id = req.params.id;
   const workTime = await database.masterWorkTime.getWorkTimeByMasterId(id);
   res.send(workTime);
-});
-
-app.get("/master-work-time", async (req, res) => {
-  const { date } = req.body;
-  const workTime = await database.masterWorkTime.getWorkTimeByDate(date);
-  res.status(201).send(workTime);
-});
-
-app.get("/master-work-time", async (req, res) => {
-  const { date, time } = req.body;
-  const workTime = await database.masterWorkTime.getWorkTimeByDateTime(
-    date,
-    time
-  );
-  res.status(201).send(workTime);
 });
 
 app.post("/master-work-time", async (req, res) => {
@@ -77,6 +70,38 @@ app.post("/master-work-time", async (req, res) => {
       master_id
     );
   res.status(201).send(newMasterWorkTimeId);
+});
+
+app.get("/record", async (req, res) => {
+  const { client, master } = req.query;
+  let record;
+
+  if (client) {
+    record = await database.records.getRecordByClientId(client);
+  } else if (master) {
+    record = await database.records.getRecordByMasterId(master);
+  } else {
+    record = await database.records.getRecords();
+  }
+
+  res.send(record);
+});
+
+app.get("/record/:id", async (req, res) => {
+  const id = req.params.id;
+  const record = await database.records.getRecord(id);
+  res.send(record);
+});
+
+app.post("/record", async (req, res) => {
+  const { id_service, id_master, id_client, data_time } = req.body;
+  const record = await database.records.createRecord(
+    id_service,
+    id_master,
+    id_client,
+    data_time
+  );
+  res.status(201).send(record);
 });
 
 app.use((err, req, res, next) => {
