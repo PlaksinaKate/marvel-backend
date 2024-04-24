@@ -14,7 +14,7 @@ async function getMaster(id) {
 
 async function createMaster(name, position, description) {
   const [result] = await pool.query(
-    `INSERT INTO master (name, position, description) VALUES (?, ?)`,
+    `INSERT INTO master (name, position, description) VALUES (?, ?, ?)`,
     [name, position, description]
   );
 
