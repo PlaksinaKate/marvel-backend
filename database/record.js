@@ -20,10 +20,11 @@ async function getRecordByMasterId(masterId) {
 
   const { id_record, id_service, id_client, data_time } = rows[0];
   const client = await database.clients.getClient(id_client);
+  const service = await database.services.getService(id_service);
 
   return {
     id_record,
-    id_service,
+    service,
     client,
     data_time,
   };
@@ -36,10 +37,11 @@ async function getRecordByClientId(clientId) {
 
   const { id_record, id_service, id_master, data_time } = rows[0];
   const master = await database.masters.getMaster(id_master);
+  const service = await database.services.getService(id_service);
 
   return {
     id_record,
-    id_service,
+    service,
     master,
     data_time,
   };
