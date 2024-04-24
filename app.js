@@ -104,6 +104,40 @@ app.post("/record", async (req, res) => {
   res.status(201).send(record);
 });
 
+app.get("/service", async (req, res) => {
+  const { group, master } = req.query;
+  let service;
+
+  if (group) {
+    service = await database.services.getServicesByServiceGroup(group);
+  } else if (master) {
+    service = await database.services.getServicesByMaster(master);
+  } else {
+    service = await database.services.getServices();
+  }
+
+  res.send(service);
+});
+
+app.get("/service/:id", async (req, res) => {
+  const id = req.params.id;
+  const service = await database.services.getService(id);
+  res.send(service);
+});
+
+app.post("/service", async (req, res) => {
+  const { name, id_group, price, id_master, description, time } = req.body;
+  const service = await database.services.createService(
+    name,
+    id_group,
+    price,
+    id_master,
+    description,
+    time
+  );
+  res.status(201).send(service);
+});
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke! ");
