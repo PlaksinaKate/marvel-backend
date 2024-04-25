@@ -16,8 +16,8 @@ app.get("/client/:id", async (req, res) => {
 });
 
 app.post("/client", async (req, res) => {
-  const { name, phone } = req.body;
-  const newClientId = await database.clients.createClient(name, phone);
+  const { name, phone, password } = req.body;
+  const newClientId = await database.clients.createClient(name, phone, password);
   res.status(201).send(newClientId);
 });
 
