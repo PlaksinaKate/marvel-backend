@@ -21,8 +21,18 @@ async function createClient(name, phone, password) {
   return result.insertId;
 }
 
+async function updateClient(id, name, phone) {
+  const [result] = await pool.query(
+    `UPDATE client SET name=?, phone=? WHERE id_client = ?`,
+    [name, phone, id]
+  );
+
+  return result.insertId;
+}
+
 export const clients = {
   getClients,
   getClient,
   createClient,
+  updateClient,
 };

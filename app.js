@@ -4,8 +4,7 @@ import { router as client } from "./express/client.js";
 import { routers } from "./express/routers.js";
 
 const app = express();
-app.use(express.json());
-app.use(routers.client, client);
+app.use(express.json()).use(routers.client, client);
 
 app.get("/master", async (req, res) => {
   const mastersRes = await database.masters.getMasters();
