@@ -32,3 +32,10 @@ masterWorkTime.post("", async (req, res) => {
     );
   res.status(201).send(newMasterWorkTimeId);
 });
+
+masterWorkTime.put("", async (req, res) => {
+  const { id, date, time_interval } = req.body;
+  const newMasterWorkTimeId =
+    await database.masterWorkTime.updateMasterWorkTime(id, date, time_interval);
+  res.status(201).send(newMasterWorkTimeId);
+});

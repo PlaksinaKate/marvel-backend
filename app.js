@@ -1,46 +1,15 @@
 import express from "express";
 import { database } from "./database/index.js";
 import { routers } from "./express/routers.js";
-import { client, master, masterWorkTime } from "./express/index.js";
+import { client, master, masterWorkTime, record } from "./express/index.js";
 
 const app = express();
 app
   .use(express.json())
   .use(routers.client, client)
   .use(routers.master, master)
-  .use(routers.masterWorkTime, masterWorkTime);
-
-app.get("/record", async (req, res) => {
-  const { client, master } = req.query;
-  let record;
-
-  if (client) {
-    record = await database.records.getRecordByClientId(client);
-  } else if (master) {
-    record = await database.records.getRecordByMasterId(master);
-  } else {
-    record = await database.records.getRecords();
-  }
-
-  res.send(record);
-});
-
-app.get("/record/:id", async (req, res) => {
-  const id = req.params.id;
-  const record = await database.records.getRecord(id);
-  res.send(record);
-});
-
-app.post("/record", async (req, res) => {
-  const { id_service, id_master, id_client, data_time } = req.body;
-  const record = await database.records.createRecord(
-    id_service,
-    id_master,
-    id_client,
-    data_time
-  );
-  res.status(201).send(record);
-});
+  .use(routers.masterWorkTime, masterWorkTime)
+  .use(routers.record, record);
 
 app.get("/service", async (req, res) => {
   const { group, master } = req.query;
