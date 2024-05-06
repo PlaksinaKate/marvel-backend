@@ -24,3 +24,9 @@ master.post("", async (req, res) => {
   );
   res.status(201).send(newMasterId);
 });
+
+master.put('', async (req, res) => {
+  const { id, name, position, description } = req.body;
+  const master = await database.masters.updateMaster(id, name, position, description);
+  res.status(200).send(master);
+});
