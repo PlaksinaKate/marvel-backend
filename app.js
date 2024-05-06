@@ -1,32 +1,10 @@
 import express from "express";
 import { database } from "./database/index.js";
-import { router as client } from "./express/client.js";
 import { routers } from "./express/routers.js";
+import { client, master } from "./express/index.js";
 
 const app = express();
-app.use(express.json()).use(routers.client, client);
-
-app.get("/master", async (req, res) => {
-  const mastersRes = await database.masters.getMasters();
-  res.send(mastersRes);
-});
-
-app.get("/master/:id", async (req, res) => {
-  const id = req.params.id;
-  const master = await database.masters.getMaster(id);
-  res.send(master);
-});
-
-app.post("/master", async (req, res) => {
-  const { name, position, description, password } = req.body;
-  const newMasterId = await database.masters.createMaster(
-    name,
-    position,
-    description,
-    password
-  );
-  res.status(201).send(newMasterId);
-});
+app.use(express.json()).use(routers.client, client).use(routers.master, master);
 
 app.get("/master-work-time", async (req, res) => {
   const { date, time } = req.query;
