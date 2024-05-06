@@ -1,40 +1,14 @@
 import express from "express";
 import { database } from "./database/index.js";
 import { routers } from "./express/routers.js";
-import { client, master } from "./express/index.js";
+import { client, master, masterWorkTime } from "./express/index.js";
 
 const app = express();
-app.use(express.json()).use(routers.client, client).use(routers.master, master);
-
-app.get("/master-work-time", async (req, res) => {
-  const { date, time } = req.query;
-  let workTime;
-  if (date && time) {
-    workTime = await database.masterWorkTime.getWorkTimeByDateTime(date, time);
-  } else if (date) {
-    workTime = await database.masterWorkTime.getWorkTimeByDate(date);
-  } else {
-    workTime = await database.masterWorkTime.getAllMasterWorkTime();
-  }
-  res.send(workTime);
-});
-
-app.get("/master-work-time/:id", async (req, res) => {
-  const id = req.params.id;
-  const workTime = await database.masterWorkTime.getWorkTimeByMasterId(id);
-  res.send(workTime);
-});
-
-app.post("/master-work-time", async (req, res) => {
-  const { date, time_interval, master_id } = req.body;
-  const newMasterWorkTimeId =
-    await database.masterWorkTime.createMasterWorkTime(
-      date,
-      time_interval,
-      master_id
-    );
-  res.status(201).send(newMasterWorkTimeId);
-});
+app
+  .use(express.json())
+  .use(routers.client, client)
+  .use(routers.master, master)
+  .use(routers.masterWorkTime, masterWorkTime);
 
 app.get("/record", async (req, res) => {
   const { client, master } = req.query;
