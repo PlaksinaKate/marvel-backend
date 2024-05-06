@@ -22,8 +22,18 @@ async function createServiceGroup(name) {
   return result.insertId;
 }
 
+async function updateServiceGroup(id, name) {
+  const [result] = await pool.query(
+    `UPDATE service_group SET name=? WHERE id_group = ?`,
+    [name, id]
+  );
+
+  return result.insertId;
+}
+
 export const serviceGroup = {
   getServiceGroups,
   getServiceGroup,
   createServiceGroup,
+  updateServiceGroup
 };
