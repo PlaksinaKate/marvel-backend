@@ -42,3 +42,9 @@ service.put('', async (req, res) => {
   const newClientId = await database.services.updateService(id, name, price, description);
   res.status(200).send(newClientId);
 });
+
+service.delete('', async (req, res) => {
+  const { id } = req.params;
+  const newClientId = await database.services.deleteService(id);
+  res.status(200).send(newClientId);
+});

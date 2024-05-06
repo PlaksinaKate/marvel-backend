@@ -49,6 +49,17 @@ async function updateService(id, name, price, description) {
   return result.insertId;
 }
 
+async function deleteService(id) {
+  const [result] = await pool.query(
+    `DELETE FROM service WHERE id = ?`,
+    [id]
+  );
+
+  console.log(result)
+
+  return result.insertId;
+}
+
 export const services = {
   getServices,
   getService,
@@ -56,4 +67,5 @@ export const services = {
   getServicesByMaster,
   createService,
   updateService,
+  deleteService
 };
