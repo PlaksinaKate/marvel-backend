@@ -1,7 +1,7 @@
 import express from "express";
 import { database } from "./database/index.js";
 import { routers } from "./express/routers.js";
-import { client, master, masterWorkTime, record } from "./express/index.js";
+import { client, master, masterWorkTime, record, service } from "./express/index.js";
 
 const app = express();
 app
@@ -9,41 +9,8 @@ app
   .use(routers.client, client)
   .use(routers.master, master)
   .use(routers.masterWorkTime, masterWorkTime)
-  .use(routers.record, record);
-
-app.get("/service", async (req, res) => {
-  const { group, master } = req.query;
-  let service;
-
-  if (group) {
-    service = await database.services.getServicesByServiceGroup(group);
-  } else if (master) {
-    service = await database.services.getServicesByMaster(master);
-  } else {
-    service = await database.services.getServices();
-  }
-
-  res.send(service);
-});
-
-app.get("/service/:id", async (req, res) => {
-  const id = req.params.id;
-  const service = await database.services.getService(id);
-  res.send(service);
-});
-
-app.post("/service", async (req, res) => {
-  const { name, id_group, price, id_master, description, time } = req.body;
-  const service = await database.services.createService(
-    name,
-    id_group,
-    price,
-    id_master,
-    description,
-    time
-  );
-  res.status(201).send(service);
-});
+  .use(routers.record, record)
+  .use(routers.service, service);
 
 app.get("/service-group", async (req, res) => {
   let serviceGroup = await database.serviceGroup.getServiceGroups();

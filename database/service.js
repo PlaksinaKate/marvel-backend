@@ -40,10 +40,20 @@ async function createService(
   return result.insertId;
 }
 
+async function updateService(id, name, price, description) {
+  const [result] = await pool.query(
+    `UPDATE service SET name=?, price=?, description=? WHERE id = ?`,
+    [name, price, description, id]
+  );
+
+  return result.insertId;
+}
+
 export const services = {
   getServices,
   getService,
   getServicesByServiceGroup,
   getServicesByMaster,
-  createService
+  createService,
+  updateService,
 };
