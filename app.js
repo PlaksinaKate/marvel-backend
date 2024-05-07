@@ -1,6 +1,6 @@
 import express from "express";
-import { routers } from "./express/routers.js";
-import { client, master, masterWorkTime, record, service, serviceGroup } from "./express/index.js";
+import { routers } from "./routers/routers.js";
+import { client, master, masterWorkTime, record, service, serviceGroup } from "./routers/index.js";
 
 const app = express();
 app
