@@ -1,21 +1,42 @@
 import express from "express";
+import session from "express-session";
 import { routers } from "./routers/routers.js";
-import { client, master, masterWorkTime, record, service, serviceGroup, login } from "./routers/index.js";
+import {
+  client,
+  master,
+  masterWorkTime,
+  record,
+  service,
+  serviceGroup,
+  login,
+} from "./routers/index.js";
 
 const app = express();
-app
-  .use(express.json())
-  .use(routers.client, client)
-  .use(routers.master, master)
-  .use(routers.masterWorkTime, masterWorkTime)
-  .use(routers.record, record)
-  .use(routers.service, service)
-  .use(routers.serviceGroup, serviceGroup)
-  .use(routers.login, login);
+app.use(
+  session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(routers.client, client);
+app.use(routers.master, master);
+app.use(routers.masterWorkTime, masterWorkTime);
+app.use(routers.record, record);
+app.use(routers.service, service);
+app.use(routers.serviceGroup, serviceGroup);
+app.use(routers.login, login);
 
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("Something broke! ");
+  res.status(err.statusCode || 500).send({
+      status: "error",
+      message: err.message
+  });
+  next();
 });
 
 app.listen(8080, () => {

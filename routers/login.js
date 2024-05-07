@@ -8,6 +8,9 @@ login.post("/admin", async (req, res) => {
   const result = await database.admin.loginAdmin(login, password);
 
   if (result.length > 0) {
+    req.session.loggedin = true;
+    req.session.admin = login;
+
     res.send({
       status: "ok",
     });
@@ -21,6 +24,9 @@ login.post("/client", async (req, res) => {
   const result = await database.clients.loginClient(phone, password);
 
   if (result.length > 0) {
+
+    req.session.loggedin = true;
+    req.session.client = phone;
     res.send({
       status: "ok",
     });
@@ -34,6 +40,10 @@ login.post("/master", async (req, res) => {
   const result = await database.masters.loginMaster(login, password);
 
   if (result.length > 0) {
+
+    req.session.loggedin = true;
+    req.session.master = login;
+
     res.send({
       status: "ok",
     });
