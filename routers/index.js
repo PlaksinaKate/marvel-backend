@@ -4,5 +4,6 @@ import { masterWorkTime } from "./master-work-time.js";
 import { record } from "./record.js";
 import { service } from "./service.js";
 import { serviceGroup } from "./service-group.js";
+import { login } from "./login.js";
 
-export { client, master, masterWorkTime, record, service, serviceGroup };
+export { client, master, masterWorkTime, record, service, serviceGroup, login };

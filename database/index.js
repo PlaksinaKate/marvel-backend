@@ -4,6 +4,7 @@ import { masterWorkTime } from "./master-work-time.js";
 import { records } from "./record.js";
 import { services } from "./service.js";
 import { serviceGroup } from "./services-group.js";
+import { admin } from "./admin.js";
 
 export const database = {
   clients,
@@ -11,6 +12,7 @@ export const database = {
   masterWorkTime,
   records,
   services,
-  serviceGroup
+  serviceGroup,
+  admin
 }
 

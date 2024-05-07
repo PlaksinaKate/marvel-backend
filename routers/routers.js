@@ -4,5 +4,6 @@ export const routers = {
   masterWorkTime: '/master-work-time',
   record: '/record',
   service: '/service',
-  serviceGroup: '/service-group'
+  serviceGroup: '/service-group',
+  login: '/login'
 }

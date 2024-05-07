@@ -1,6 +1,6 @@
 import express from "express";
 import { routers } from "./routers/routers.js";
-import { client, master, masterWorkTime, record, service, serviceGroup } from "./routers/index.js";
+import { client, master, masterWorkTime, record, service, serviceGroup, login } from "./routers/index.js";
 
 const app = express();
 app
@@ -10,7 +10,8 @@ app
   .use(routers.masterWorkTime, masterWorkTime)
   .use(routers.record, record)
   .use(routers.service, service)
-  .use(routers.serviceGroup, serviceGroup);
+  .use(routers.serviceGroup, serviceGroup)
+  .use(routers.login, login);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
