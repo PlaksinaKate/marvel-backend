@@ -30,9 +30,19 @@ async function updateClient(id, name, phone) {
   return result.insertId;
 }
 
+async function loginClient(phone, password) {
+  const [result] = await pool.query(
+    `SELECT * FROM client WHERE phone = ? AND password = ?`,
+    [login, password]
+  );
+
+  return result;
+}
+
 export const clients = {
   getClients,
   getClient,
   createClient,
   updateClient,
+  loginClient
 };

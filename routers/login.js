@@ -15,3 +15,16 @@ login.post("/admin", async (req, res) => {
     res.send("Неверный логин или пароль");
   }
 });
+
+login.post("/client", async (req, res) => {
+  const { phone, password } = req.body;
+  const result = await database.clients.loginClient(phone, password);
+
+  if (result.length > 0) {
+    res.send({
+      status: "ok",
+    });
+  } else {
+    res.send("Неверный номер или пароль");
+  }
+});
