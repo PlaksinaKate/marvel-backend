@@ -20,6 +20,16 @@ master.post("", async (req, res) => {
     name,
     position,
     description,
+    password,
+    login
+  );
+  res.status(201).send(newMasterId);
+});
+
+master.post("", async (req, res) => {
+  const { login, password } = req.body;
+  const newMasterId = await database.masters.loginMaster(
+    login,
     password
   );
   res.status(201).send(newMasterId);

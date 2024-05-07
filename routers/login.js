@@ -12,7 +12,7 @@ login.post("/admin", async (req, res) => {
       status: "ok",
     });
   } else {
-    res.send("Неверный логин или пароль");
+    res.status(400).send("Неверный логин или пароль");
   }
 });
 
@@ -25,6 +25,19 @@ login.post("/client", async (req, res) => {
       status: "ok",
     });
   } else {
-    res.send("Неверный номер или пароль");
+    res.status(400).send("Неверный номер или пароль");
+  }
+});
+
+login.post("/master", async (req, res) => {
+  const { login, password } = req.body;
+  const result = await database.masters.loginMaster(login, password);
+
+  if (result.length > 0) {
+    res.send({
+      status: "ok",
+    });
+  } else {
+    res.status(400).send("Неверный номер или пароль");
   }
 });

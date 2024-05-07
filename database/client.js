@@ -33,7 +33,7 @@ async function updateClient(id, name, phone) {
 async function loginClient(phone, password) {
   const [result] = await pool.query(
     `SELECT * FROM client WHERE phone = ? AND password = ?`,
-    [login, password]
+    [phone, password]
   );
 
   return result;
