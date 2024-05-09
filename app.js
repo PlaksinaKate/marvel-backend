@@ -1,4 +1,5 @@
 import express from "express";
+import cors from 'cors';
 import session from "express-session";
 import { routers } from "./routers/routers.js";
 import {
@@ -13,6 +14,7 @@ import {
 } from "./routers/index.js";
 
 const app = express();
+app.use(cors())
 app.use(
   session({
     secret: "secret",
