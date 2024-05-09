@@ -14,27 +14,6 @@ master.get("/:id", async (req, res) => {
   res.send(master);
 });
 
-master.post("", async (req, res) => {
-  const { name, position, description, password } = req.body;
-  const newMasterId = await database.masters.createMaster(
-    name,
-    position,
-    description,
-    password,
-    login
-  );
-  res.status(201).send(newMasterId);
-});
-
-master.post("", async (req, res) => {
-  const { login, password } = req.body;
-  const newMasterId = await database.masters.loginMaster(
-    login,
-    password
-  );
-  res.status(201).send(newMasterId);
-});
-
 master.put('', async (req, res) => {
   const { id, name, position, description } = req.body;
   const master = await database.masters.updateMaster(id, name, position, description);

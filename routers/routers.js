@@ -5,5 +5,6 @@ export const routers = {
   record: '/record',
   service: '/service',
   serviceGroup: '/service-group',
-  login: '/login'
+  login: '/login',
+  registration: '/registration'
 }

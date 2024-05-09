@@ -14,12 +14,6 @@ client.get(`/:id`, async (req, res) => {
   res.send(client);
 });
 
-client.post('', async (req, res) => {
-  const { name, phone, password } = req.body;
-  const newClientId = await database.clients.createClient(name, phone, password);
-  res.status(201).send(newClientId);
-});
-
 client.put('', async (req, res) => {
   const { id, name, phone } = req.body;
   const newClientId = await database.clients.updateClient(id, name, phone);

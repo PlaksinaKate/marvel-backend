@@ -12,13 +12,20 @@ async function getMaster(id) {
   return rows[0];
 }
 
+async function getMasterByLogin(login) {
+  const [rows] = await pool.query(`SELECT * FROM master WHERE login = ?`, [
+    login,
+  ]);
+  return rows[0];
+}
+
 async function createMaster(name, position, description, password, login) {
   const [result] = await pool.query(
     `INSERT INTO master (name, position, description, password, login) VALUES (?, ?, ?, ?, ?)`,
     [name, position, description, password, login]
   );
 
-  return result.insertId;
+  return result;
 }
 
 async function updateMaster(id, name, position, description) {
@@ -44,5 +51,6 @@ export const masters = {
   getMaster,
   createMaster,
   updateMaster,
-  loginMaster
+  loginMaster,
+  getMasterByLogin
 };

@@ -5,5 +5,15 @@ import { record } from "./record.js";
 import { service } from "./service.js";
 import { serviceGroup } from "./service-group.js";
 import { login } from "./login.js";
+import { registration } from "./registration.js";
 
-export { client, master, masterWorkTime, record, service, serviceGroup, login };
+export {
+  client,
+  master,
+  masterWorkTime,
+  record,
+  service,
+  serviceGroup,
+  login,
+  registration,
+};

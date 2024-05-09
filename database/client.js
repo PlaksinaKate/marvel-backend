@@ -12,13 +12,20 @@ async function getClient(id) {
   return rows[0];
 }
 
+async function getClientByPhone(phone) {
+  const [rows] = await pool.query(`SELECT * FROM client WHERE phone = ?`, [
+    phone,
+  ]);
+  return rows[0];
+}
+
 async function createClient(name, phone, password) {
   const [result] = await pool.query(
     `INSERT INTO client (name, phone, password) VALUES (?, ?, ?)`,
     [name, phone, password]
   );
 
-  return result.insertId;
+  return result;
 }
 
 async function updateClient(id, name, phone) {
@@ -44,5 +51,6 @@ export const clients = {
   getClient,
   createClient,
   updateClient,
-  loginClient
+  loginClient,
+  getClientByPhone
 };

@@ -9,6 +9,7 @@ import {
   service,
   serviceGroup,
   login,
+  registration
 } from "./routers/index.js";
 
 const app = express();
@@ -29,6 +30,7 @@ app.use(routers.masterWorkTime, masterWorkTime);
 app.use(routers.record, record);
 app.use(routers.service, service);
 app.use(routers.serviceGroup, serviceGroup);
+app.use(routers.registration, registration);
 app.use(routers.login, login);
 
 app.use((err, req, res, next) => {
