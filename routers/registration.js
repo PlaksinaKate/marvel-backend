@@ -15,7 +15,9 @@ registration.post("", async (req, res) => {
       result = await database.clients.createClient(name, phone, password);
       role = "client";
     } else {
-      res.status(400).send(`Клиент с там номером телефона уже существует`);
+      res.status(400).send({
+        error: `Клиент с там номером телефона уже существует`,
+      });
       result = "";
     }
   }
@@ -33,7 +35,9 @@ registration.post("", async (req, res) => {
       );
       role = "master";
     } else {
-      res.status(400).send(`Maстер с таким login уже существует`);
+      res.status(400).send({
+        error: `Maстер с таким login уже существует`,
+      });
       result = "";
     }
   }

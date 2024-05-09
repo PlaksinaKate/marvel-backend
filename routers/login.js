@@ -34,6 +34,8 @@ login.post("", async (req, res) => {
       role,
     });
   } else {
-    res.status(400).send("Неверный логин или пароль");
+    res.status(400).send({
+      error: "Неверный логин или пароль",
+    });
   }
 });
