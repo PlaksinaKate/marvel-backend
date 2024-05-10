@@ -4,7 +4,7 @@ import { database } from "../database/index.js";
 export const login = express.Router();
 
 login.post("", async (req, res) => {
-  const { login, phone, password } = req.body;
+  const { login, password } = req.body;
   let result;
   let role;
 
@@ -20,8 +20,8 @@ login.post("", async (req, res) => {
     req.session.master = login;
   }
 
-  if (phone && password) {
-    result = await database.clients.loginClient(phone, password);
+  if (result.length === 0) {
+    result = await database.clients.loginClient(login, password);
     role = "client";
     req.session.client = login;
   }
