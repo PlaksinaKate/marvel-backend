@@ -15,13 +15,19 @@ service.get("", async (req, res) => {
     service = await database.services.getServices();
   }
 
-  res.send(service);
+  res.send({
+    status: "ok",
+    services: service
+  });
 });
 
 service.get("/:id", async (req, res) => {
   const id = req.params.id;
   const service = await database.services.getService(id);
-  res.send(service);
+  res.send({
+    status: "ok",
+    service
+  });
 });
 
 service.post("", async (req, res) => {
@@ -34,17 +40,26 @@ service.post("", async (req, res) => {
     description,
     time
   );
-  res.status(201).send(service);
+  res.status(201).send({
+    status: "ok",
+    service
+  });
 });
 
 service.put('', async (req, res) => {
   const { id, name, price, description } = req.body;
   const newClientId = await database.services.updateService(id, name, price, description);
-  res.status(200).send(newClientId);
+  res.status(200).send({
+    status: "ok",
+    newClientId
+  });
 });
 
 service.delete('', async (req, res) => {
   const { id } = req.params;
   const newClientId = await database.services.deleteService(id);
-  res.status(200).send(newClientId);
+  res.status(200).send({
+    status: "ok",
+    newClientId
+  });
 });
