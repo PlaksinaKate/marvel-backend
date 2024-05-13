@@ -20,6 +20,21 @@ master.get("/:id", async (req, res) => {
   });
 });
 
+master.post("", async (req, res) => {
+  const { name, position, description } = req.body;
+  const master = await database.masters.createMaster(
+    name,
+    position,
+    description,
+    password,
+    login
+  );
+  res.status(200).send({
+    status: "ok",
+    master,
+  });
+});
+
 master.put("", async (req, res) => {
   const { id, name, position, description } = req.body;
   const master = await database.masters.updateMaster(
