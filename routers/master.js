@@ -4,18 +4,32 @@ import { database } from "../database/index.js";
 export const master = express.Router();
 
 master.get("", async (req, res) => {
-  const mastersRes = await database.masters.getMasters();
-  res.send(mastersRes);
+  const masters = await database.masters.getMasters();
+  res.send({
+    status: "ok",
+    masters,
+  });
 });
 
 master.get("/:id", async (req, res) => {
   const id = req.params.id;
   const master = await database.masters.getMaster(id);
-  res.send(master);
+  res.send({
+    status: "ok",
+    master,
+  });
 });
 
-master.put('', async (req, res) => {
+master.put("", async (req, res) => {
   const { id, name, position, description } = req.body;
-  const master = await database.masters.updateMaster(id, name, position, description);
-  res.status(200).send(master);
+  const master = await database.masters.updateMaster(
+    id,
+    name,
+    position,
+    description
+  );
+  res.status(200).send({
+    status: "ok",
+    master,
+  });
 });
