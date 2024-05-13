@@ -28,10 +28,10 @@ async function createMaster(name, position, description, password, login) {
   return result;
 }
 
-async function updateMaster(id, name, position, description) {
+async function updateMaster(id, name, position, description, login) {
   const [result] = await pool.query(
-    `UPDATE master SET name=?, position=?, description=? WHERE id_master = ?`,
-    [name, position, description, id]
+    `UPDATE master SET name=?, position=?, description=?, login = ? WHERE id_master = ?`,
+    [name, position, description, login, id]
   );
 
   return result.insertId;
@@ -44,7 +44,7 @@ const loginMaster = async (login, password) => {
   );
 
   return result;
-}
+};
 
 export const masters = {
   getMasters,
@@ -52,5 +52,5 @@ export const masters = {
   createMaster,
   updateMaster,
   loginMaster,
-  getMasterByLogin
+  getMasterByLogin,
 };

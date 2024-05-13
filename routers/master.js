@@ -35,12 +35,13 @@ master.post("", async (req, res) => {
 });
 
 master.put("", async (req, res) => {
-  const { id, name, position, description } = req.body;
+  const { id_master, name, position, description, login } = req.body;
   const master = await database.masters.updateMaster(
-    id,
+    id_master,
     name,
     position,
-    description
+    description,
+    login
   );
   res.status(200).send({
     status: "ok",
