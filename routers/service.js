@@ -17,7 +17,7 @@ service.get("", async (req, res) => {
 
   res.send({
     status: "ok",
-    services: service
+    services: service,
   });
 });
 
@@ -26,7 +26,7 @@ service.get("/:id", async (req, res) => {
   const service = await database.services.getService(id);
   res.send({
     status: "ok",
-    service
+    service,
   });
 });
 
@@ -42,24 +42,29 @@ service.post("", async (req, res) => {
   );
   res.status(201).send({
     status: "ok",
-    service
+    service,
   });
 });
 
-service.put('', async (req, res) => {
+service.put("", async (req, res) => {
   const { id, name, price, description } = req.body;
-  const newClientId = await database.services.updateService(id, name, price, description);
+  const newClientId = await database.services.updateService(
+    id,
+    name,
+    price,
+    description
+  );
   res.status(200).send({
     status: "ok",
-    newClientId
+    newClientId,
   });
 });
 
-service.delete('', async (req, res) => {
-  const { id } = req.params;
-  const newClientId = await database.services.deleteService(id);
+service.delete("", async (req, res) => {
+  const { id } = req.query;
+  console.log("id", id);
+  await database.services.deleteService(id);
   res.status(200).send({
     status: "ok",
-    newClientId
   });
 });
