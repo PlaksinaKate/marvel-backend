@@ -21,7 +21,7 @@ master.get("/:id", async (req, res) => {
 });
 
 master.post("", async (req, res) => {
-  const { name, position, description } = req.body;
+  const { name, position, description, password, login } = req.body;
   const master = await database.masters.createMaster(
     name,
     position,
@@ -31,7 +31,6 @@ master.post("", async (req, res) => {
   );
   res.status(200).send({
     status: "ok",
-    master,
   });
 });
 
