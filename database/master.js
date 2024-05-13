@@ -37,6 +37,15 @@ async function updateMaster(id, name, position, description, login) {
   return result.insertId;
 }
 
+async function deleteMaster(id) {
+  const [result] = await pool.query(
+    `DELETE FROM master WHERE id_master = ?`,
+    [id]
+  );
+
+  return result.insertId;
+}
+
 const loginMaster = async (login, password) => {
   const [result] = await pool.query(
     `SELECT * FROM master WHERE login = ? AND password = ?`,
@@ -53,4 +62,5 @@ export const masters = {
   updateMaster,
   loginMaster,
   getMasterByLogin,
+  deleteMaster
 };

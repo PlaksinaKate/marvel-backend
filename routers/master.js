@@ -48,3 +48,11 @@ master.put("", async (req, res) => {
     master,
   });
 });
+
+master.delete("", async (req, res) => {
+  const { id } = req.query;
+  await database.masters.deleteMaster(id);
+  res.status(200).send({
+    status: "ok",
+  });
+});

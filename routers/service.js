@@ -62,7 +62,6 @@ service.put("", async (req, res) => {
 
 service.delete("", async (req, res) => {
   const { id } = req.query;
-  console.log("id", id);
   await database.services.deleteService(id);
   res.status(200).send({
     status: "ok",
