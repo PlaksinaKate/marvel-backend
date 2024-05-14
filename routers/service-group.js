@@ -22,15 +22,26 @@ serviceGroup.post("", async (req, res) => {
   const service = await database.serviceGroup.createServiceGroup(name);
   res.status(201).send({
     status: "ok",
-    service
+    service,
   });
 });
 
 serviceGroup.put("", async (req, res) => {
   const { id_group, name } = req.body;
-  const newClientId = await database.serviceGroup.updateServiceGroup(id_group, name);
+  const newClientId = await database.serviceGroup.updateServiceGroup(
+    id_group,
+    name
+  );
   res.status(200).send({
     status: "ok",
-    newClientId
+    newClientId,
+  });
+});
+
+serviceGroup.delete("", async (req, res) => {
+  const { id_group } = req.query;
+  const newClientId = await database.serviceGroup.deleteServiceGroup(id_group);
+  res.status(200).send({
+    status: "ok",
   });
 });

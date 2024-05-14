@@ -31,9 +31,19 @@ async function updateServiceGroup(id, name) {
   return result.insertId;
 }
 
+async function deleteServiceGroup(id) {
+  const [result] = await pool.query(
+    `DELETE FROM service_group WHERE id_group = ?`,
+    [id]
+  );
+
+  return result.insertId;
+}
+
 export const serviceGroup = {
   getServiceGroups,
   getServiceGroup,
   createServiceGroup,
-  updateServiceGroup
+  updateServiceGroup,
+  deleteServiceGroup
 };
