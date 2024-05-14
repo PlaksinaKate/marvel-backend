@@ -47,12 +47,15 @@ service.post("", async (req, res) => {
 });
 
 service.put("", async (req, res) => {
-  const { id, name, price, description } = req.body;
+  const { id, name, id_group, price, id_master, description, time } = req.body;
   const newClientId = await database.services.updateService(
     id,
     name,
+    id_group,
     price,
-    description
+    id_master,
+    description,
+    time
   );
   res.status(200).send({
     status: "ok",

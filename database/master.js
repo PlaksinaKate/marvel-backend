@@ -6,7 +6,7 @@ async function getMasters() {
 }
 
 async function getMaster(id) {
-  const [rows] = await pool.query(`SELECT * FROM master WHERE id_master = ?`, [
+  const [rows] = await pool.query(`SELECT * FROM master WHERE id = ?`, [
     id,
   ]);
   return rows[0];
@@ -30,7 +30,7 @@ async function createMaster(name, position, description, password, login) {
 
 async function updateMaster(id, name, position, description, login) {
   const [result] = await pool.query(
-    `UPDATE master SET name=?, position=?, description=?, login = ? WHERE id_master = ?`,
+    `UPDATE master SET name=?, position=?, description=?, login = ? WHERE id = ?`,
     [name, position, description, login, id]
   );
 

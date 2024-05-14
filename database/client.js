@@ -6,7 +6,7 @@ async function getClients() {
 }
 
 async function getClient(id) {
-  const [rows] = await pool.query(`SELECT * FROM client WHERE id_client = ?`, [
+  const [rows] = await pool.query(`SELECT * FROM client WHERE id = ?`, [
     id,
   ]);
   return rows[0];
@@ -30,7 +30,7 @@ async function createClient(name, phone, password) {
 
 async function updateClient(id, name, phone) {
   const [result] = await pool.query(
-    `UPDATE client SET name=?, phone=? WHERE id_client = ?`,
+    `UPDATE client SET name=?, phone=? WHERE id = ?`,
     [name, phone, id]
   );
 

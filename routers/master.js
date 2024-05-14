@@ -22,7 +22,7 @@ master.get("/:id", async (req, res) => {
 
 master.post("", async (req, res) => {
   const { name, position, description, password, login } = req.body;
-  const master = await database.masters.createMaster(
+  await database.masters.createMaster(
     name,
     position,
     description,
@@ -35,9 +35,9 @@ master.post("", async (req, res) => {
 });
 
 master.put("", async (req, res) => {
-  const { id_master, name, position, description, login } = req.body;
+  const { id, name, position, description, login } = req.body;
   const master = await database.masters.updateMaster(
-    id_master,
+    id,
     name,
     position,
     description,

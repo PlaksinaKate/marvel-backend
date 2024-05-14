@@ -40,22 +40,27 @@ async function createService(
   return result.insertId;
 }
 
-async function updateService(id, name, price, description) {
+async function updateService(
+  id,
+  name,
+  id_group,
+  price,
+  id_master,
+  description,
+  time
+) {
   const [result] = await pool.query(
-    `UPDATE service SET name=?, price=?, description=? WHERE id = ?`,
-    [name, price, description, id]
+    `UPDATE service SET name=?, id_group=?, price=?, id_master=?, description=?, time=? WHERE id = ?`,
+    [name, id_group, price, id_master, description, time, id]
   );
 
   return result.insertId;
 }
 
 async function deleteService(id) {
-  const [result] = await pool.query(
-    `DELETE FROM service WHERE id = ?`,
-    [id]
-  );
+  const [result] = await pool.query(`DELETE FROM service WHERE id = ?`, [id]);
 
-  console.log(result)
+  console.log(result);
 
   return result.insertId;
 }
@@ -67,5 +72,5 @@ export const services = {
   getServicesByMaster,
   createService,
   updateService,
-  deleteService
+  deleteService,
 };

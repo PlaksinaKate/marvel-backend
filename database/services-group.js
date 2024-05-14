@@ -7,7 +7,7 @@ async function getServiceGroups() {
 
 async function getServiceGroup(id) {
   const [rows] = await pool.query(
-    `SELECT * FROM service_group WHERE id_group = ?`,
+    `SELECT * FROM service_group WHERE id = ?`,
     [id]
   );
   return rows[0];
@@ -24,7 +24,7 @@ async function createServiceGroup(name) {
 
 async function updateServiceGroup(id, name) {
   const [result] = await pool.query(
-    `UPDATE service_group SET name=? WHERE id_group = ?`,
+    `UPDATE service_group SET name=? WHERE id = ?`,
     [name, id]
   );
 
@@ -33,7 +33,7 @@ async function updateServiceGroup(id, name) {
 
 async function deleteServiceGroup(id) {
   const [result] = await pool.query(
-    `DELETE FROM service_group WHERE id_group = ?`,
+    `DELETE FROM service_group WHERE id = ?`,
     [id]
   );
 

@@ -58,7 +58,7 @@ async function createRecord(id_service, id_master, id_client, data_time) {
 
 async function updateRecord(id, id_master, data_time) {
   const [result] = await pool.query(
-    `UPDATE client SET data_time=?, id_master=? WHERE id_record = ?`,
+    `UPDATE client SET data_time=?, id_master=? WHERE id = ?`,
     [id, id_master, data_time]
   );
 
