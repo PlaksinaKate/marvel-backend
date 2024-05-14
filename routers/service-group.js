@@ -5,7 +5,10 @@ export const serviceGroup = express.Router();
 
 serviceGroup.get("", async (req, res) => {
   let serviceGroup = await database.serviceGroup.getServiceGroups();
-  res.send(serviceGroup);
+  res.send({
+    status: "ok",
+    serviceGroup,
+  });
 });
 
 serviceGroup.get("/:id", async (req, res) => {
@@ -17,11 +20,17 @@ serviceGroup.get("/:id", async (req, res) => {
 serviceGroup.post("", async (req, res) => {
   const { name } = req.body;
   const service = await database.serviceGroup.createServiceGroup(name);
-  res.status(201).send(service);
+  res.status(201).send({
+    status: "ok",
+    service
+  });
 });
 
-serviceGroup.put('', async (req, res) => {
+serviceGroup.put("", async (req, res) => {
   const { id, name } = req.body;
   const newClientId = await database.serviceGroup.updateServiceGroup(id, name);
-  res.status(200).send(newClientId);
+  res.status(200).send({
+    status: "ok",
+    newClientId
+  });
 });
