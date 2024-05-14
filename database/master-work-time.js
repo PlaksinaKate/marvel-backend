@@ -45,6 +45,13 @@ async function updateMasterWorkTime(id, date, time_interval, master_id) {
   );
 }
 
+async function deleteMasterWorkTime(id) {
+  const [result] = await pool.query(
+    `DELETE FROM master_work_time WHERE id = ?`,
+    [id]
+  );
+}
+
 export const masterWorkTime = {
   getAllMasterWorkTime,
   getWorkTimeByMasterId,
@@ -52,4 +59,5 @@ export const masterWorkTime = {
   getWorkTimeByDateTime,
   createMasterWorkTime,
   updateMasterWorkTime,
+  deleteMasterWorkTime
 };

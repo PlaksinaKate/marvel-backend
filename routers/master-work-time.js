@@ -45,9 +45,22 @@ masterWorkTime.post("", async (req, res) => {
 masterWorkTime.put("", async (req, res) => {
   const { id, date, time_interval, master_id } = req.body;
   const newMasterWorkTimeId =
-    await database.masterWorkTime.updateMasterWorkTime(id, date, time_interval, master_id);
+    await database.masterWorkTime.updateMasterWorkTime(
+      id,
+      date,
+      time_interval,
+      master_id
+    );
   res.status(201).send({
     status: "ok",
     newMasterWorkTimeId,
+  });
+});
+
+masterWorkTime.delete("", async (req, res) => {
+  const { id } = req.query;
+  await database.masterWorkTime.deleteMasterWorkTime(id);
+  res.status(201).send({
+    status: "ok",
   });
 });

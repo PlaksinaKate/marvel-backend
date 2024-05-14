@@ -59,9 +59,6 @@ async function updateService(
 
 async function deleteService(id) {
   const [result] = await pool.query(`DELETE FROM service WHERE id = ?`, [id]);
-
-  console.log(result);
-
   return result.insertId;
 }
 
