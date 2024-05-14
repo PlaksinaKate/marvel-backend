@@ -38,10 +38,10 @@ async function createMasterWorkTime(date, time_interval, master_id) {
   return result.insertId;
 }
 
-async function updateMasterWorkTime(id, date, time_interval) {
+async function updateMasterWorkTime(id, date, time_interval, master_id) {
   const [result] = await pool.query(
-    `UPDATE master_work_time SET date=?, time_interval=? WHERE id = ?`,
-    [date, time_interval, id]
+    `UPDATE master_work_time SET date=?, time_interval=?, master_id=? WHERE id = ?`,
+    [date, time_interval, master_id, id]
   );
 }
 
