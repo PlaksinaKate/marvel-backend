@@ -27,8 +27,8 @@ serviceGroup.post("", async (req, res) => {
 });
 
 serviceGroup.put("", async (req, res) => {
-  const { id, name } = req.body;
-  const newClientId = await database.serviceGroup.updateServiceGroup(id, name);
+  const { id_group, name } = req.body;
+  const newClientId = await database.serviceGroup.updateServiceGroup(id_group, name);
   res.status(200).send({
     status: "ok",
     newClientId
