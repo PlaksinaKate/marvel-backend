@@ -13,13 +13,19 @@ masterWorkTime.get("", async (req, res) => {
   } else {
     workTime = await database.masterWorkTime.getAllMasterWorkTime();
   }
-  res.send(workTime);
+  res.send({
+    status: "ok",
+    workTime,
+  });
 });
 
 masterWorkTime.get("/:id", async (req, res) => {
   const id = req.params.id;
   const workTime = await database.masterWorkTime.getWorkTimeByMasterId(id);
-  res.send(workTime);
+  res.send({
+    status: "ok",
+    workTime,
+  });
 });
 
 masterWorkTime.post("", async (req, res) => {
@@ -30,12 +36,18 @@ masterWorkTime.post("", async (req, res) => {
       time_interval,
       master_id
     );
-  res.status(201).send(newMasterWorkTimeId);
+  res.status(201).send({
+    status: "ok",
+    newMasterWorkTimeId,
+  });
 });
 
 masterWorkTime.put("", async (req, res) => {
   const { id, date, time_interval } = req.body;
   const newMasterWorkTimeId =
     await database.masterWorkTime.updateMasterWorkTime(id, date, time_interval);
-  res.status(201).send(newMasterWorkTimeId);
+  res.status(201).send({
+    status: "ok",
+    newMasterWorkTimeId,
+  });
 });
