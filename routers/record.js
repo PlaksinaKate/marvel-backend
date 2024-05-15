@@ -17,7 +17,7 @@ record.get("", async (req, res) => {
 
   res.send({
     status: "ok",
-    records
+    records,
   });
 });
 
@@ -40,16 +40,18 @@ record.post("", async (req, res) => {
   );
   res.status(201).send({
     status: "ok",
-    records
+    records,
   });
 });
 
 record.put("", async (req, res) => {
-  const { id, id_master, date_time } = req.body;
+  const { id, id_service, id_master, id_client, data_time } = req.body;
   const newClientId = await database.records.updateRecord(
     id,
+    id_service,
     id_master,
-    date_time
+    id_client,
+    data_time
   );
   res.status(200).send({
     status: "ok",
