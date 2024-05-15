@@ -65,6 +65,15 @@ async function updateRecord(id, id_service, id_master, id_client, data_time) {
   return result.insertId;
 }
 
+async function deleteRecord(id) {
+  const [result] = await pool.query(
+    `DELETE FROM record WHERE id = ?`,
+    [id]
+  );
+
+  return result.insertId;
+}
+
 export const records = {
   getRecords,
   getRecord,
@@ -72,4 +81,5 @@ export const records = {
   getRecordByClientId,
   createRecord,
   updateRecord,
+  deleteRecord
 };

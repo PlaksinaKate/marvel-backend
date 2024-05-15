@@ -55,6 +55,13 @@ record.put("", async (req, res) => {
   );
   res.status(200).send({
     status: "ok",
-    newClientId,
+  });
+});
+
+record.delete("", async (req, res) => {
+  const { id } = req.query;
+  const newClientId = await database.records.deleteRecord(id);
+  res.status(200).send({
+    status: "ok",
   });
 });
