@@ -21,14 +21,14 @@ record.get("", async (req, res) => {
   });
 });
 
-record.get("/:id", async (req, res) => {
+/* record.get("/:id", async (req, res) => {
   const id = req.params.id;
   const records = await database.records.getRecord(id);
   res.send({
     status: "ok",
     records,
   });
-});
+}); */
 
 record.post("", async (req, res) => {
   const { id_service, id_master, id_client, data_time } = req.body;

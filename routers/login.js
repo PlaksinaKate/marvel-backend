@@ -32,6 +32,7 @@ login.post("", async (req, res) => {
     res.send({
       status: "ok",
       role,
+      user: role !== "admin" && result
     });
   } else {
     res.status(400).send({
