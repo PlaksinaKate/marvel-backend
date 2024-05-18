@@ -10,7 +10,7 @@ async function getWorkTimeByMasterId(id) {
     `SELECT * FROM master_work_time WHERE master_id = ?`,
     [id]
   );
-  return rows[0];
+  return rows;
 }
 
 async function getWorkTimeByDate(date) {
@@ -18,7 +18,7 @@ async function getWorkTimeByDate(date) {
     `SELECT * FROM master_work_time WHERE date = ?`,
     [date]
   );
-  return rows[0];
+  return rows;
 }
 
 async function getWorkTimeByDateTime(date, time) {
@@ -26,7 +26,7 @@ async function getWorkTimeByDateTime(date, time) {
     `SELECT * FROM master_work_time WHERE date = ? AND time_interval = ?`,
     [date, time]
   );
-  return rows[0];
+  return rows;
 }
 
 async function createMasterWorkTime(date, time_interval, master_id) {

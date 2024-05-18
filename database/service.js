@@ -14,7 +14,7 @@ async function getServicesByServiceGroup(id) {
   const [rows] = await pool.query(`SELECT * FROM service WHERE id_group = ?`, [
     id,
   ]);
-  return rows[0];
+  return rows;
 }
 
 async function getServicesByMaster(id) {

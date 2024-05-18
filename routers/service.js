@@ -21,15 +21,6 @@ service.get("", async (req, res) => {
   });
 });
 
-service.get("/:id", async (req, res) => {
-  const id = req.params.id;
-  const service = await database.services.getService(id);
-  res.send({
-    status: "ok",
-    service,
-  });
-});
-
 service.post("", async (req, res) => {
   const { name, id_group, price, id_master, description, time } = req.body;
   const service = await database.services.createService(
