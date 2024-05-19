@@ -39,7 +39,7 @@ async function updateMaster(id, name, position, description, login) {
 
 async function deleteMaster(id) {
   const [result] = await pool.query(
-    `DELETE FROM master WHERE id_master = ?`,
+    `DELETE FROM master WHERE id = ?`,
     [id]
   );
 
