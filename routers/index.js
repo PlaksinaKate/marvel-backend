@@ -17,3 +17,9 @@ export {
   login,
   registration,
 };
+
+export const unauthorized = (req, res, next) => {
+  if (!req.session.user == null) {
+    res.status(401).send({ status: "error" });
+  }
+}

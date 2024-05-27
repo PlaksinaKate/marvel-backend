@@ -26,14 +26,27 @@ login.post("", async (req, res) => {
     req.session.client = login;
   }
 
-  if (result.length > 0) {
-    req.session.loggedin = true;
+  console.log('result', result[0])
 
-    res.send({
-      status: "ok",
-      role,
-      user: role !== "admin" && result[0]
-    });
+  if (result.length > 0) {
+    if (req.session.authenticated) {
+      res.json(req.session);
+    } else {
+      req.session.authenticated = true;
+
+      req.session.user = {
+        id: result[0].id,
+        role: role,
+      };
+
+      res.json(req.session);
+
+      res.send({
+        status: "ok",
+        role,
+        user: role !== "admin" && result[0],
+      });
+    }
   } else {
     res.status(400).send({
       error: "Неверный логин или пароль",

@@ -4,6 +4,8 @@ import { database } from "../database/index.js";
 export const record = express.Router();
 
 record.get("", async (req, res) => {
+  unauthorized(req, res);
+
   const { client, master } = req.query;
   let records;
 
@@ -21,16 +23,9 @@ record.get("", async (req, res) => {
   });
 });
 
-/* record.get("/:id", async (req, res) => {
-  const id = req.params.id;
-  const records = await database.records.getRecord(id);
-  res.send({
-    status: "ok",
-    records,
-  });
-}); */
-
 record.post("", async (req, res) => {
+  unauthorized(req, res);
+
   const { id_service, id_master, id_client, data_time } = req.body;
   const records = await database.records.createRecord(
     id_service,
@@ -45,8 +40,10 @@ record.post("", async (req, res) => {
 });
 
 record.put("", async (req, res) => {
+  unauthorized(req, res);
+
   const { id, id_service, id_master, id_client, data_time } = req.body;
-  const newClientId = await database.records.updateRecord(
+  await database.records.updateRecord(
     id,
     id_service,
     id_master,
@@ -59,6 +56,8 @@ record.put("", async (req, res) => {
 });
 
 record.delete("", async (req, res) => {
+  unauthorized(req, res);
+
   const { id } = req.query;
   const newClientId = await database.records.deleteRecord(id);
   res.status(200).send({

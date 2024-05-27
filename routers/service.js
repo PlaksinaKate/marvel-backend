@@ -4,6 +4,8 @@ import { database } from "../database/index.js";
 export const service = express.Router();
 
 service.get("", async (req, res) => {
+  unauthorized(req, res);
+
   const { group, master } = req.query;
   let service;
 
@@ -22,6 +24,8 @@ service.get("", async (req, res) => {
 });
 
 service.post("", async (req, res) => {
+  unauthorized(req, res);
+
   const { name, id_group, price, id_master, description, time } = req.body;
   const service = await database.services.createService(
     name,
@@ -38,6 +42,8 @@ service.post("", async (req, res) => {
 });
 
 service.put("", async (req, res) => {
+  unauthorized(req, res);
+
   const { id, name, id_group, price, id_master, description, time } = req.body;
   const newClientId = await database.services.updateService(
     id,
@@ -55,6 +61,8 @@ service.put("", async (req, res) => {
 });
 
 service.delete("", async (req, res) => {
+  unauthorized(req, res);
+
   const { id } = req.query;
   await database.services.deleteService(id);
   res.status(200).send({

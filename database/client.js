@@ -9,7 +9,7 @@ async function getClient(id) {
   const [rows] = await pool.query(`SELECT * FROM client WHERE id = ?`, [
     id,
   ]);
-  return rows[0];
+  return rows;
 }
 
 async function getClientByPhone(phone) {

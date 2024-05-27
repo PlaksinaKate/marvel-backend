@@ -4,6 +4,8 @@ import { database } from "../database/index.js";
 export const masterWorkTime = express.Router();
 
 masterWorkTime.get("", async (req, res) => {
+  unauthorized(req, res);
+
   const { date, time } = req.query;
   let workTime;
   if (date && time) {
@@ -20,6 +22,8 @@ masterWorkTime.get("", async (req, res) => {
 });
 
 masterWorkTime.get("/:id", async (req, res) => {
+  unauthorized(req, res);
+
   const id = req.params.id;
   const workTime = await database.masterWorkTime.getWorkTimeByMasterId(id);
   res.send({
@@ -29,6 +33,8 @@ masterWorkTime.get("/:id", async (req, res) => {
 });
 
 masterWorkTime.post("", async (req, res) => {
+  unauthorized(req, res);
+
   const { date, time_interval, master_id } = req.body;
   const newMasterWorkTimeId =
     await database.masterWorkTime.createMasterWorkTime(
@@ -43,6 +49,8 @@ masterWorkTime.post("", async (req, res) => {
 });
 
 masterWorkTime.put("", async (req, res) => {
+  unauthorized(req, res);
+
   const { id, date, time_interval, master_id } = req.body;
   const newMasterWorkTimeId =
     await database.masterWorkTime.updateMasterWorkTime(
@@ -58,6 +66,8 @@ masterWorkTime.put("", async (req, res) => {
 });
 
 masterWorkTime.delete("", async (req, res) => {
+  unauthorized(req, res);
+
   const { id } = req.query;
   await database.masterWorkTime.deleteMasterWorkTime(id);
   res.status(201).send({
