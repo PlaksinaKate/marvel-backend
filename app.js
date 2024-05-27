@@ -11,6 +11,7 @@ import {
   serviceGroup,
   login,
   registration,
+  logout
 } from "./routers/index.js";
 const store = new session.MemoryStore();
 
@@ -37,6 +38,7 @@ app.use(routers.service, service);
 app.use(routers.serviceGroup, serviceGroup);
 app.use(routers.registration, registration);
 app.use(routers.login, login);
+app.use(routers.logout, logout);
 
 app.use((err, req, res, next) => {
   res.status(500).send({

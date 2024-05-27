@@ -6,5 +6,6 @@ export const routers = {
   service: '/service',
   serviceGroup: '/service-group',
   login: '/login',
-  registration: '/registration'
+  registration: '/registration',
+  logout: '/logout'
 }

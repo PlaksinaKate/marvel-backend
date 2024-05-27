@@ -6,6 +6,7 @@ import { service } from "./service.js";
 import { serviceGroup } from "./service-group.js";
 import { login } from "./login.js";
 import { registration } from "./registration.js";
+import { logout } from "./logout.js";
 
 export {
   client,
@@ -16,10 +17,11 @@ export {
   serviceGroup,
   login,
   registration,
+  logout,
 };
 
 export const unauthorized = (req, res, next) => {
   if (!req.session.user == null) {
     res.status(401).send({ status: "error" });
   }
-}
+};
