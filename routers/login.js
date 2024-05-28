@@ -26,8 +26,6 @@ login.post("", async (req, res) => {
     req.session.client = login;
   }
 
-  console.log('result', result[0])
-
   if (result.length > 0) {
     if (req.session.authenticated) {
       res.json(req.session);

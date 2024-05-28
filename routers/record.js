@@ -1,5 +1,6 @@
 import express from "express";
 import { database } from "../database/index.js";
+import { unauthorized } from "./index.js";
 
 export const record = express.Router();
 

@@ -1,10 +1,11 @@
 import express from "express";
 import { database } from "../database/index.js";
+import { unauthorized } from "./index.js";
 
 export const serviceGroup = express.Router();
 
 serviceGroup.get("", async (req, res) => {
-  //unauthorized(req, res);
+  unauthorized(req, res);
 
   let serviceGroup = await database.serviceGroup.getServiceGroups();
   res.send({
