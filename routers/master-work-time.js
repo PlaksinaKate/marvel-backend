@@ -24,10 +24,10 @@ masterWorkTime.get("", async (req, res) => {
 
 masterWorkTime.get("/:id", async (req, res) => {
   unauthorized(req, res);
-
+  
   const id = req.params.id;
   const workTime = await database.masterWorkTime.getWorkTimeByMasterId(id);
-  res.send({
+  res.status(200).send({
     status: "ok",
     workTime,
   });
