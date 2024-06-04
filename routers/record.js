@@ -27,12 +27,13 @@ record.get("", async (req, res) => {
 record.post("", async (req, res) => {
   unauthorized(req, res);
 
-  const { id_service, id_master, id_client, data_time } = req.body;
+  const { id_service, id_master, id_client, data_time, status } = req.body;
   const records = await database.records.createRecord(
     id_service,
     id_master,
     id_client,
-    data_time
+    data_time,
+    status
   );
   res.status(201).send({
     status: "ok",
@@ -43,13 +44,14 @@ record.post("", async (req, res) => {
 record.put("", async (req, res) => {
   unauthorized(req, res);
 
-  const { id, id_service, id_master, id_client, data_time } = req.body;
+  const { id, id_service, id_master, id_client, data_time, status } = req.body;
   await database.records.updateRecord(
     id,
     id_service,
     id_master,
     id_client,
-    data_time
+    data_time,
+    status
   );
   res.status(200).send({
     status: "ok",

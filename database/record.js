@@ -29,19 +29,19 @@ async function getRecordByClientId(clientId) {
   return rows;
 }
 
-async function createRecord(id_service, id_master, id_client, data_time) {
+async function createRecord(id_service, id_master, id_client, data_time, status) {
   const [result] = await pool.query(
-    `INSERT INTO record (id_service, id_master, id_client, data_time) VALUES (?, ?, ?, ?)`,
-    [id_service, id_master, id_client, data_time]
+    `INSERT INTO record (id_service, id_master, id_client, data_time, status) VALUES (?, ?, ?, ?, ?)`,
+    [id_service, id_master, id_client, data_time, status]
   );
 
   return result.insertId;
 }
 
-async function updateRecord(id, id_service, id_master, id_client, data_time) {
+async function updateRecord(id, id_service, id_master, id_client, data_time, status) {
   const [result] = await pool.query(
-    `UPDATE record SET id_service=?, id_master=?, id_client=?, data_time=? WHERE id = ?`,
-    [id_service, id_master, id_client, data_time, id]
+    `UPDATE record SET id_service=?, id_master=?, id_client=?, data_time=?, status=? WHERE id = ?`,
+    [id_service, id_master, id_client, data_time, status, id]
   );
 
   return result.insertId;
