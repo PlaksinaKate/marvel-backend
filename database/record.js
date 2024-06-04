@@ -53,6 +53,15 @@ async function deleteRecord(id) {
   return result.insertId;
 }
 
+async function confirmRecord(id) {
+  const [result] = await pool.query(
+    `UPDATE record SET status=? WHERE id = ?`,
+    ['подтвержден', id]
+  );
+
+  return result.insertId;
+}
+
 export const records = {
   getRecords,
   getRecord,
@@ -61,4 +70,5 @@ export const records = {
   createRecord,
   updateRecord,
   deleteRecord,
+  confirmRecord
 };

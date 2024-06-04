@@ -12,35 +12,35 @@ async function getClient(id) {
   return rows[0];
 }
 
-async function getClientByPhone(phone) {
-  const [rows] = await pool.query(`SELECT * FROM client WHERE phone = ?`, [
-    phone,
+async function getClientByPhone(email) {
+  const [rows] = await pool.query(`SELECT * FROM client WHERE email = ?`, [
+    email,
   ]);
   return rows[0];
 }
 
-async function createClient(name, phone, password) {
+async function createClient(name, email, password) {
   const [result] = await pool.query(
-    `INSERT INTO client (name, phone, password) VALUES (?, ?, ?)`,
-    [name, phone, password]
+    `INSERT INTO client (name, email, password) VALUES (?, ?, ?)`,
+    [name, email, password]
   );
 
   return result;
 }
 
-async function updateClient(id, name, phone) {
+async function updateClient(id, name, email) {
   const [result] = await pool.query(
-    `UPDATE client SET name=?, phone=? WHERE id = ?`,
-    [name, phone, id]
+    `UPDATE client SET name=?, email=? WHERE id = ?`,
+    [name, email, id]
   );
 
   return result.insertId;
 }
 
-async function loginClient(phone, password) {
+async function loginClient(email, password) {
   const [result] = await pool.query(
-    `SELECT * FROM client WHERE phone = ? AND password = ?`,
-    [phone, password]
+    `SELECT * FROM client WHERE email = ? AND password = ?`,
+    [email, password]
   );
 
   return result;

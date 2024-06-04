@@ -4,19 +4,19 @@ import { database } from "../database/index.js";
 export const registration = express.Router();
 
 registration.post("", async (req, res) => {
-  const { login, name, position, description, phone, password } = req.body;
+  const { login, name, position, description, email, password } = req.body;
   let result;
   let role;
 
-  if (name && phone && password) {
-    result = await database.clients.getClientByPhone(phone);
+  if (name && email && password) {
+    result = await database.clients.getClientByPhone(email);
 
     if (result === undefined) {
-      result = await database.clients.createClient(name, phone, password);
+      result = await database.clients.createClient(name, email, password);
       role = "client";
     } else {
       res.status(400).send({
-        error: `Клиент с там номером телефона уже существует`,
+        error: `Клиент с там e-mail уже существует`,
       });
       result = "";
     }

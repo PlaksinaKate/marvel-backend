@@ -51,9 +51,9 @@ app.use((err, req, res, next) => {
   next();
 });
 
-cron.schedule('0 13 * * *', () => {
+cron.schedule('0 22 * * *', () => {
   console.log('running a task every minute');
- // checkClientsRecord()
+ checkClientsRecord()
 });
 
 app.listen(8080, () => {

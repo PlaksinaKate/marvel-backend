@@ -58,6 +58,16 @@ record.put("", async (req, res) => {
   });
 });
 
+record.put("/confirm", async (req, res) => {
+  const id = req.query.id;
+  await database.records.confirmRecord(
+    id,
+  );
+  res.status(200).send({
+    status: "ok",
+  });
+});
+
 record.delete("", async (req, res) => {
   unauthorized(req, res);
 

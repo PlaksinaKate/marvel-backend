@@ -22,7 +22,7 @@ client.get("/profile", async (req, res) => {
 client.put("", async (req, res) => {
   unauthorized(req, res);
 
-  const { id, name, phone } = req.body;
-  await database.clients.updateClient(id, name, phone);
+  const { id, name, email } = req.body;
+  await database.clients.updateClient(id, name, email);
   res.status(200).send({ status: "ok" });
 });
