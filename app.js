@@ -14,7 +14,7 @@ import {
   logout
 } from "./routers/index.js";
 import cron from 'node-cron'
-import { sendMail, checkClientsRecord } from "./mail.js";
+import { checkClientsRecord } from "./mail.js";
 
 const store = new session.MemoryStore();
 
@@ -51,7 +51,7 @@ app.use((err, req, res, next) => {
   next();
 });
 
-cron.schedule('0 22 * * *', () => {
+cron.schedule('0 13 * * *', () => {
   console.log('running a task every minute');
  checkClientsRecord()
 });
