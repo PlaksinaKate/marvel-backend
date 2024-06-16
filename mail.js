@@ -19,12 +19,13 @@ export const checkClientsRecord = async () => {
         await database.masters.getMaster(id_master),
         await database.services.getService(id_service),
       ]).then((result) => {
-        console.log(result);
+        console.log('result[0]', result[0])
         sendMail({
-          name: result[0].value.name,
-          service: result[2].value.name,
-          date: new Date(data_time).toLocaleString(),
-          master: result[1].value.name,
+          email: result[0].value?.email,
+          name: result[0].value?.name,
+          service: result[2].value?.name,
+          date: new Date(data_time).toLocaleString('ru-RU'),
+          master: result[1]?.value.name,
           id,
         });
       });
@@ -32,7 +33,7 @@ export const checkClientsRecord = async () => {
   });
 };
 
-export async function sendMail({ name, service, date, master, id }) {
+export async function sendMail({ email, name, service, date, master, id }) {
   try {
     var transport = nodemailer.createTransport({
       host: "live.smtp.mailtrap.io",
@@ -45,13 +46,16 @@ export async function sendMail({ name, service, date, master, id }) {
 
     const mailOptions = {
       from: "Marvel салон  mailtrap@demomailtrap.com",
-      to: "plaksina.ekaterina20@gmail.com",
+      to: email,
       subject: "Email Scheduler",
       text: "Hello from spambot",
       html: `
       <h3>Здравствуйте, ${name}!</h3>
       <p>Вы записаны на процедуру ${service} ${date} к мастеру ${master}</p>
-      <p>Пожалуйста, подтвердите запись http://localhost:5173/confirm-record?id=${id}</p>
+      <p>Пожалуйста, подтвердите запись https://marvel-studio.vercel.app/confirm-record?id=${id}</p>
+      <br/>
+      <p>Адрес:</p>
+      <p>бульвар Победы, 42, Воронеж, Воронежская область, Россия, 394077</p>
       <br/>
       <p>С уважением,</p>
       <p>Салон Marvel</p>`,

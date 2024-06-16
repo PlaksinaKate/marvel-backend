@@ -52,7 +52,6 @@ app.use((err, req, res, next) => {
 });
 
 cron.schedule('0 13 * * *', () => {
-  console.log('running a task every minute');
  checkClientsRecord()
 });
 
