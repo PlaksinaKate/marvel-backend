@@ -19,7 +19,16 @@ import { checkClientsRecord } from "./mail.js";
 const store = new session.MemoryStore();
 
 const app = express();
+// app.use((rs,next)=>{
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//   next();
+//   });
+
 app.use(cors());
+app.options('*' , cors());
+
 app.use(
   session({
     secret: "secret",
